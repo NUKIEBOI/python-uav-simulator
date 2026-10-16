@@ -1,0 +1,6 @@
+# Runtime dependencies
+panda3d>=1.10.13      # 3D graphics, windowing, input
+numpy>=1.24           # math for the flight model and sensor geometry
+
+# Optional (development)
+# pytest>=7.0         # tests run without it: python tests/test_uav_model.py
