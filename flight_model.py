@@ -216,9 +216,19 @@ class FlightModel:
         # --- Moments ---
         p, qrate, r = self.omega
         v_damp = max(V, 2.0)
+        # Near/fully stalled wing -> the tail flies in separated, turbulent
+        # flow, so the elevator progressively loses authority. Without this,
+        # full back-elevator could pin the nose in a deep stall forever;
+        # now the nose drops and the wing recovers, like the real thing.
+        _a_onset = uav.alpha_crit * 0.85
+        if abs(alpha) > _a_onset and V > 5.0:
+            _depth = min(1.0, (abs(alpha) - _a_onset) / 0.15)
+            elev_auth = 1.0 - 0.65 * _depth
+        else:
+            elev_auth = 1.0
         Cm = (uav.Cm0 + uav.Cma * alpha
               + uav.Cmq * (qrate * cbar / (2 * v_damp))
-              + uav.Cmde * de)
+              + uav.Cmde * de * elev_auth)
         Cl = (uav.Clb * beta
               + uav.Clp * (p * b / (2 * v_damp))
               + uav.Clda * da + uav.Cldr * dr)

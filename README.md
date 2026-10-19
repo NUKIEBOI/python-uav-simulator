@@ -59,11 +59,15 @@ python tests/test_uav_model.py   # headless unit tests
 | `V` | Auto-scan sweep on/off |
 | `L` | Detection log panel on/off |
 | `U` | Autopilot engage / disengage |
-| `C` | Camera: chase → nose FPV → payload → tower |
-| `P` | Pause |
+| `C` | Camera: chase → nose FPV → payload → tower → top-down → free |
+| `P` / `Space` | Pause |
 | `R` | Reset flight |
 | `H` | Toggle help overlay |
 | `Esc` | Quit |
+
+**Free camera** (`C` until "free"): `WASD` flies the camera, `Q`/`E` go
+down/up, hold `Shift` for 4x speed, scroll wheel adjusts speed, hold
+right-mouse to look around. The flight keys steer the camera there.
 
 **Typical sortie:** full throttle (hold `Shift`), rotate at ~12 m/s (pull `S`
 gently), climb out, press `U` for the autopilot circuit, press `V` to start
